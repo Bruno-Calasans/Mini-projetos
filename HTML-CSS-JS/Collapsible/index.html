@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible</title>
+    <script src="script.js" defer></script>
+</head>
+
+    <style>
+
+        .container{
+            background-color: burlywood;
+        }
+
+        .btn{
+            display: block;
+            background-color: rgb(218, 128, 39);
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            font-size: 1.5em;
+        }
+
+        .active, .btn:hover{
+            background-color: rgba(169, 92, 16, 0.761);
+        }
+
+        .simbol{
+            float: right;
+            font-size: 1.5em;
+        }
+
+        .content{
+            padding: 5px;
+            text-align: justify;
+            display: none;
+            overflow: hidden; /*pro conteúdo não vazar*/
+            max-height: 0px;
+            transition: max-height 1s ease-out;
+            
+        }
+
+        .btn::after{
+            content: '\02795';
+            font-size: 10px;
+            font-weight: bold;
+            float: right;
+            margin-top: 5px;
+            color: rgb(238, 237, 237);
+        }
+
+        /*o conteúdo depois que a class for mudada será trocado*/
+        .active::after{
+            content: '\2796';
+            
+        }
+
+</style>
+
+<body>
+
+    <h1>Collapsible</h1>
+
+
+
+   <div class="container">
+
+       <button class="btn">Abrir</button>
+        <div class="content">
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur fuga fugit quo nobis, labore aperiam sequi alias laborum corporis quasi ea, delectus aliquam ipsa iusto natus blanditiis rerum numquam corrupti.
+            </p>
+        </div>
+   </div>
+   <div class="container">
+
+    <button class="btn">Abrir</button>
+     <div class="content">
+         <p>
+             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur fuga fugit quo nobis, labore aperiam sequi alias laborum corporis quasi ea, delectus aliquam ipsa iusto natus blanditiis rerum numquam corrupti.
+         </p>
+     </div>
+</div>
+<div class="container">
+
+    <button class="btn">Abrir</button>
+     <div class="content">
+         <p>
+             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur fuga fugit quo nobis, labore aperiam sequi alias laborum corporis quasi ea, delectus aliquam ipsa iusto natus blanditiis rerum numquam corrupti.
+         </p>
+     </div>
+</div>
+    
+
+
+    
+</body>
+</html>

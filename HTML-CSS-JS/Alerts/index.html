@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts</title>
+    <script src="script.js" defer></script>
+    <style>
+
+        .alert{
+            background-color: red;
+            padding: 10px;
+            color: rgb(247, 247, 247);
+            font-weight: bold;
+            font-family: sans-serif;
+            font-size: 1.1em;
+            position: relative;
+            margin-bottom: 15px;
+            border-radius: 2px;
+        }
+
+        .closeBtn{
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 1.5em;
+            transition: color 0.5s;
+        }
+
+        .closeBtn:hover{
+            cursor: pointer;
+            color: black;
+            transition: color 0.5s;
+        }
+
+        #erro{
+            background-color: rgba(255, 0, 0, 0.650);
+        }
+
+        #aviso{
+            background-color: rgba(218, 170, 13, 0.768);
+        }
+
+        #info{
+            background-color: rgba(0, 0, 255, 0.650);
+        }
+
+        #sucesso{
+            background-color: rgba(0, 128, 0, 0.650);
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div id="erro" class="alert">
+        Erro<span class="closeBtn">&times</span>
+    </div>
+
+    <div id="aviso" class="alert">
+        Aviso!<span class="closeBtn">&times</span>
+    </div>
+
+    <div id="info" class="alert">
+        Info!<span class="closeBtn">&times</span>
+    </div>
+
+    <div id="sucesso" class="alert">
+        Sucesso<span class="closeBtn">&times</span>
+    </div>
+
+</body>
+</html>

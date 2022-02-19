@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Delete</title>
+
+    <style>
+
+        .modal{
+            background-color: rgba(63, 62, 62, 0.556);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+
+        .closeBtn{
+            font-size: 3em;
+            position: absolute;
+            right: 10px;
+            top: -5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .closeBtn:hover{
+            color: rgb(235, 66, 24);
+        }
+
+        .modalContent{
+            text-align: center;
+            font-family: sans-serif;
+            border: 2px solid black;
+            background-color: bisque;
+            overflow: auto;
+            padding: 10px;
+            width: 50%;
+            margin: 50px auto;
+        }
+
+        .modalContent button{
+            width: 50%;
+            float: left;
+            padding: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            border: 1px solid black;
+        }
+
+        #cancel{
+            background-color: grey;
+
+        }
+
+        #cancel:hover{
+            background-color: lightgrey;
+        }
+        
+        #confirm{
+            background-color: #8b00008e;
+        }
+
+        #confirm:hover{
+            background-color: #ff000093;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <button id="open">Abrir modal</button>
+
+    <div id="modal" class="modal">
+
+        <span id="close" class="closeBtn">&times</span>
+        <div class="modalContent">
+
+            <h1>Deletar conta</h1>
+
+            <p>
+                Você tem certeza que quer deletar a sua conta?
+            </p>
+
+            <button id="cancel">Cancelar</button>
+            <button id="confirm">Confirmar</button>
+
+        </div>
+    </div>
+
+    <script>
+        var modal = this.document.getElementById('modal')
+        var openBtn = this.document.getElementById('open')
+        var closeBtn = this.document.getElementById('close')
+        var cancelBtn = this.document.getElementById('cancel')
+        var confirmBtn = this.document.getElementById('confirm')
+
+
+        function abrirModal(){
+            modal.style.display = 'block'
+        }
+
+        function fecharModal(){
+            modal.style.display = 'none'
+        }
+
+        openBtn.onclick = function(){abrirModal()}
+        closeBtn.onclick = function(){fecharModal()}
+        cancelBtn.onclick = function(){fecharModal()}
+        confirmBtn.onclick = function(){fecharModal()}
+
+
+    </script>
+    
+</body>
+</html>

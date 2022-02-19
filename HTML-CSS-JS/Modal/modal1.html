@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal</title>
+
+    <style>
+        .modal{
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        background-color: rgba(0, 0, 0, 0.303);
+
+        }
+
+        .modalContent{
+        background-color: rgba(225, 225, 238, 0.789);
+        width: 50%;
+        margin: 20px auto;
+        padding: 5px;
+        border: 1px solid black;
+        position: relative;
+        }
+
+        .btnClose{
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+        position: absolute;
+        right: 5px;
+        top: -1px;
+        }
+
+        .btnClose:hover{
+        color: white;
+        cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <button id="click">Clique em mim</button>
+
+    <div id="modal" class="modal">
+
+        <div  class="modalContent">
+            <span id="close" class="btnClose">&times;</span>
+
+            <h1>Modal Box</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt veniam laboriosam adipisci. Exercitationem molestiae vitae hic id sint aut corrupti a nihil quasi dolorem, magnam, quos veniam, sequi explicabo earum.</p>
+        </div>
+    </div>
+
+    <script>
+
+        var clickBtn = this.document.getElementById('click')
+        var modal = this.document.getElementById('modal')
+        var closeBtn = this.document.getElementById('close')
+
+        clickBtn.onclick =  function abrirModal(){
+            modal.style.display = 'block';
+        }
+
+        closeBtn.onclick =  function fecharModal(){
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(){
+
+            console.log(event.target)
+
+            if(event.target == modal){
+                modal.style.display = 'none';
+            }
+
+        }
+
+    </script>
+    
+</body>
+</html>
