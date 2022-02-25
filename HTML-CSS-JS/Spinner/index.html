@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loader</title>
+</head>
+<style>
+
+    body{
+        margin-bottom: 20px;
+    }
+
+    div{
+        display: inline-block;
+    }
+
+    .loader{
+        border: 10px solid transparent;
+        border-top: 10px solid rgb(32, 116, 162);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+
+        animation: girar 2s linear infinite;
+    }
+
+    #customLoader1{
+        border: 10px solid transparent;
+        border-top: 10px solid rgb(32, 162, 75);
+        border-bottom: 10px solid rgb(32, 162, 75);
+        
+    }
+
+    #customLoader2{
+        border: 10px solid transparent;
+        border-top: 10px solid rgb(32, 52, 162);
+        border-bottom: 10px solid rgb(32, 52, 162);
+        border-left: 10px solid rgb(32, 52, 162);
+        
+    }
+
+    #customLoader3{
+        border: 10px solid transparent;
+        border-top: 10px solid rgb(32, 52, 162);
+        border-bottom: 10px solid rgb(218, 69, 15);
+        border-left: 10px solid rgb(162, 32, 136);
+        
+    }
+
+    @keyframes girar{
+
+        from {transform: rotate(0deg)}
+        to {transform: rotate(360deg)}
+    }
+
+</style>
+<body>
+    <h1>Criando um loader ou spinner</h1>
+
+    <h2>Exemplo de loader</h2>
+    <div class="loader"></div>
+
+    <h2>Exemplo de loader personalizado</h2>
+    <div class="loader" id="customLoader1"></div>
+
+    <h2>Outro exemplo de loader personalizado</h2>
+    <div class="loader" id="customLoader2"></div>
+
+    <h2>Mais outro exemplo de loader personalizado</h2>
+    <div class="loader" id="customLoader3"></div>
+
+</body>
+</html>
