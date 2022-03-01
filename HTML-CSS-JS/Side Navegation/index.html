@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side navegation</title>
+    <style>
+
+        body{
+            transition:  background-color 0.5s;
+        }
+
+        .buttons{
+            display: block;
+            width: 200px;
+            margin: auto;
+        }
+
+        #sideNav{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: black;
+            color: white;
+            height: 100%;
+            width: 0;
+            padding-top: 40px;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            z-index: 1;
+            transition: width 1s, text-align 1s;
+            overflow: hidden;
+            text-align: left;
+            /*animation: aumentarLargura 2s;*/
+        }
+
+        #sideNav a{
+            font-size: 1.8em;
+            text-decoration: none;
+            color: #818181;
+            display: block;
+            padding: 5px;
+        }
+
+        #sideNav a:hover{
+            color: white
+        }
+
+        a#closeBtn{
+            position: absolute;
+            top: 0px;
+            right: 10px;
+        }
+
+        #main{
+            transition: margin-left 1s;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    
+    <button class="buttons" onclick="openNav(1)">Abrir com Sobreposição</button>
+    <button class="buttons" onclick="openNav(2)">Abrir sem Sobreposição</button>
+    <button class="buttons" onclick="openNav(3)">Abrir sem Sobreposição + opacidade</button>
+    <button class="buttons" onclick="openNav(4)">Abrir com largura completa</button>
+
+    <div id="sideNav">
+        <a href="#" id="closeBtn" onclick="closeNav(3)">&times</a>
+        <a href="#">Home</a>
+        <a href="#">Notícias</a>
+        <a href="#">Novidades</a>
+        <a href="#">Contato</a>
+    </div>
+
+    <div id="main">
+        <p> 
+            <h2>Título</h2>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat omnis libero nostrum. Fugit explicabo, ipsam eius sapiente impedit distinctio officiis repellendus quas facilis tempore voluptatibus enim iste, voluptatum, officia itaque.
+        </p>
+    </div>
+
+    <script>
+
+        function openNav(type=1){
+
+            // 1 - com sobreposição
+            // 2 - sem sobreposição
+            // 3 - sem sobreposição + opacidade
+            // 4 - sem sobreposição + largura completa
+
+            let sidenav = document.getElementById('sideNav')
+
+            if(type != 4){sidenav.style.textAlign = 'left' }
+
+            if(type == 1){
+                sidenav.style.width = '200px'
+            }
+            
+            else if(type == 2){
+                sidenav.style.width = '200px'
+                let main = document.getElementById('main')
+                main.style.marginLeft = '200px'
+
+            }
+            else if(type == 3){
+                sidenav.style.width = '200px'
+                let main = document.getElementById('main')
+                main.style.marginLeft = '200px'
+                document.body.style.backgroundColor = 'rgba(0,0,0,0.4)'
+
+            }
+            else if(type == 4){
+                sidenav.style.textAlign = 'center'
+                sidenav.style.width = '100%'
+            }
+        }
+
+        function closeNav(type=1){
+
+            // 1 - com sobreposição
+            // 2 - sem sobreposição
+            // 3 - sem sobreposição + opacidade
+            // 4 - sem sobreposição + largura completa
+
+            let sidenav = document.getElementById('sideNav')
+
+            if(type != 4){sidenav.style.textAlign = 'left'}
+
+            if(type == 1){
+                sidenav.style.width = '0px'
+
+            }else if(type == 2){
+                sidenav.style.width = '0px'
+                let main = document.getElementById('main')
+                main.style.marginLeft = '0px'
+
+            }
+            else if(type == 3){
+                sidenav.style.width = '0px'
+                let main = document.getElementById('main')
+                main.style.marginLeft = '0px'
+                document.body.style.backgroundColor = 'white'
+            }
+            else if(type == 4){
+                sidenav.style.width = '0%'
+                sidenav.style.textAlign = 'left'
+
+            }
+            
+        }
+    </script>
+</body>
+</html>
