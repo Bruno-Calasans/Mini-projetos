@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-part form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Multipart form</h1>
+
+    <form action="#" id="multiForm">
+
+        <div class="tab">
+            <h2>Identificação</h2>
+            <p>
+                <input type="text" placeholder="Primeiro nome" id="nome">
+                <input type="text" placeholder="Sobrenome" id="sobrenome">
+            </p>
+        </div>
+
+        <div class="tab">
+            <h2>Contato</h2>
+            <p>
+                <input type="tel" placeholder="Telefone" id="telefone">
+                <input type="email" placeholder="Email" id="email">
+            </p>
+        </div>
+
+        <div class="tab">
+            <h2>Nascimento</h2>
+            <p>
+                <input type="date"  id="nascimento">
+            </p>
+        </div>
+
+        <div class="tab">
+            <h2>Login</h2>
+            <p>
+                <input type="text" placeholder="Login" id="login">
+                <input type="password" placeholder="Senha" id="senha">
+            </p>
+        </div>
+
+        <div class="btns">
+            <button id="nextBtn" onclick="mudarAba(1)">Próximo</button>
+            <button id="prevBtn" onclick="mudarAba(-1)">Voltar</button>  
+        </div>
+
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+
+    </form>
+
+    
+</body>
+</html>

@@ -1,0 +1,57 @@
+form{
+    border: 1px solid black;
+    background-color: bisque;
+}
+
+.tab{
+    padding: 5px;
+    margin: 5px;
+    width: 400px;
+    margin: auto;
+    margin-bottom: 5px;
+    text-align: center;
+    display: none;
+}
+
+.tab input{
+    display: block;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+.btns{
+    overflow: auto;
+    padding: 5px;
+}
+
+.btns button{
+    padding: 5px;
+    float: right;
+    cursor: pointer;
+    display: none;
+}
+
+.step{
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active{
+    opacity: 1;
+}
+
+.step.finish{
+    background-color: #04AA6D;
+}
