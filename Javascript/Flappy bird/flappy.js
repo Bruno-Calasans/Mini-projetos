@@ -1,30 +1,50 @@
 
     // objeto globais ----------------------------------------------------------
     
-    function criarTela(id){
+    function Tela(id, largura, altura){
 
         this.elemento =  document.getElementById(id)
-        this.largura = this.elemento.clientWidth
-        this.altura = this.elemento.clientHeight
-        this.backgroundColor = this.elemento.style.backgroundColor
 
+        // insere apenas um elemento na tela
         this.inserir = function(elemento){
             this.elemento.appendChild(elemento)
         }
+
+        // inserindo mais de um elemento na tela
+        this.inserirVários = function(array=[]){
+            for(let elemento of array){
+                this.inserir(elemento)
+            }
+        }
+
+        // getters e setters
+        this.getLargura = () => Number(this.elemento.style.width.replace('px', ''))
+        this.setLargura = (l) => {
+            this.elemento.style.width = `${l}px`
+            this.largura = l
+        }
+
+        this.getAltura = () => this.elemento.clientHeight
+        this.setAltura = (a) => {
+            this.elemento.style.height = `${a}px`
+        }
+
+        // configurações iniciais da tela
+        this.setLargura(largura)
+        this.setAltura(altura)
     }
 
-    // criando tela
-    const tela = new criarTela('tela')
+    // criando uma tela
+    const tela = new Tela('tela', 800, 400)
 
     // criando um objeto score
     function Score(id){
 
-        let elemento = document.getElementById(id)
-        this.elemento = elemento
+        this.elemento = document.getElementById(id)
         this.ponto = this.elemento.firstElementChild
 
         this.getScore = () => Number(this.ponto.innerText)
-        this.setScore = (valor) => this.ponto.innerText = valor
+        this.setScore = (valor) => {this.ponto.innerText = valor}
 
         this.aumentarScore = (aumento=1) => {
             this.setScore(this.getScore() + aumento)
@@ -37,8 +57,101 @@
         this.resetar = () => {this.setScore(0)}
     }
 
-    // criando escore
+    // criando um escore
     const score = new Score('score')
+
+    function Bird(id, largura, altura, posLeft, posTop, alturaMax){
+
+        this.elemento = document.getElementById(id)
+
+        // criando os métodos
+        this.getLargura = () => Number(this.elemento.style.width.replace('px', ''))
+
+        this.setLargura = (l) => {
+            this.elemento.style.width = `${l}px`
+            this.largura = l
+        }
+
+        this.getAltura = () => Number(this.elemento.style.height.replace('px', ''))
+
+        this.setAltura = (a) => {
+            this.elemento.style.height = `${a}px`
+            this.altura = a
+        }
+
+        this.getX = () => Number(this.elemento.style.left.replace('px', ''))
+        this.setX = (x) => {this.elemento.style.left = `${x}px`}
+
+        this.getY = () => Number(this.elemento.style.bottom.replace('px', ''))
+        this.setY = (y) => {this.elemento.style.bottom = `${y}px`}
+        this.resetar = () => {
+            this.setX(posLeft)
+            this.setY(posTop)
+        }
+
+        // configurações iniciais do bird
+        this.setLargura(largura)
+        this.setAltura(altura)
+        this.setX(posLeft)
+        this.setY(posTop)
+        
+        // configurando limites do pássaro
+        this.posMax = alturaMax - this.altura
+        this.posMin = 0
+        var voando = false
+
+        // configurando o voo
+        this.subir = (deslocamento) => {
+
+            let posAtual = this.getY()
+            if(posAtual + deslocamento <= this.posMax){
+                this.setY(posAtual + deslocamento)
+
+            }else{
+                this.setY(this.posMax)
+            }
+            
+        }
+
+        this.descer = (deslocamento) => {
+
+            let posAtual = this.getY()
+            if(posAtual - deslocamento >= this.posMin){
+                this.setY(posAtual - deslocamento)
+
+            }else{
+                this.setY(this.posMin)
+            }
+            
+        }
+
+        // ao clicar ou segurar a teclad configurada
+        window.onkeydown = (e) =>{if(e.key == ' ') voando = true}          
+
+        // ao soltar a tecla
+        window.onkeyup = () =>{voando = false}
+
+        this.start = (subida=8, descida=5, velocidade=25) =>{
+
+            this.stop()
+            this.timerID = setInterval(()=>{
+
+                if(voando){
+                    this.subir(subida)
+
+                }else{
+                    this.descer(descida)
+                }
+            }, velocidade)
+        }
+
+        this.stop = () =>{
+            clearInterval(this.timerID)
+        }
+    }
+
+    // criando o pássaro
+    const bird = new Bird('bird', 50, 35, 200, 200, tela.altura)
 
     // funções ----------------------------------------------------------------
 
@@ -78,7 +191,7 @@
     }
 
     // cria um conjunto de canos com alturas específicas
-    function Canos(altura, abertura, posLeftInicial=50, largura=120){
+    function Canos(altura, largura, abertura, posLeft=50){
 
         // o elemento canos e o cano superior e inferior
         this.elementoPai = criarElemento('div', 'canos')
@@ -105,22 +218,19 @@
 
         // métodos para pegar e mudar a posição horizontal do elementos .canos
         // em relação à esquerda da tela
-        this.getPosX = () => {
-            return Number(this.elementoPai.style.left.replace('px', ''))
+        this.getPosX = () => Number(this.elementoPai.style.left.replace('px', ''))
+        
+        this.setPosX = (pos) => {
+            this.elementoPai.style.left = `${pos}px`
         }
 
-        this.setPosX = (posLeft) => {
-            this.elementoPai.style.left = `${posLeft}px`
-        }
-        this.getLargura = () => {
-            return Number(this.elementoPai.style.width.replace('px', ''))
-        }
-
-        this.setLargura = (l) => this.elementoPai.style.width = `${l}px`
+        this.getLargura = () => Number(this.elementoPai.style.width.replace('px', ''))
+        
+        this.setLargura = (l) => {this.elementoPai.style.width = `${l}px`}
 
         // configurando os canos iniciais
         this.sortearAltura(altura, abertura)
-        this.setPosX(posLeftInicial)
+        this.setPosX(posLeft)
         this.setLargura(largura)
 
         // alterando a visibilidade dos canos
@@ -128,15 +238,14 @@
     }
 
     // organizar os vários canos
-    function organizarCanos(altura, abertura, posLeft, distancia, quantidade=0){
+    function OrganizarCanos(altura, largura, abertura, posLeft, distancia, quantidade=0){
 
-        
         // criando os métodos iniciais
         this.canos = []
-        this.criarConjCanos = function(alt, abrt, pos){
+        this.criarConjCanos = function(alt, larg, abrt, pos, quantidade){
 
             for(let n = 1; n <= quantidade; n++){
-                let cano = new Canos(alt, abrt, pos)
+                let cano = new Canos(alt, larg, abrt, pos)
                 this.canos.push(cano)
             }
         }
@@ -144,32 +253,22 @@
         this.espaçarCanos = function(pos, dist){
 
             for(let cano of this.canos){
-
                 cano.setPosX(pos)
                 pos += dist + cano.getLargura()
             }
         }
 
         // iniciando os métodos iniciais
-        this.criarConjCanos(altura, abertura, posLeft)
+        this.criarConjCanos(altura, largura, abertura, posLeft, quantidade)
         this.espaçarCanos(posLeft, distancia)
 
         // array apenas com os elementos da classe .canos
         this.elementos = this.canos.map((e)=>e.elementoPai)
 
-        // inserindo todos os elementos na tela
-        this.inserirTodosNaTela = function(objetoTela){
-
-            for(let elemento of this.elementos){
-                objetoTela.inserir(elemento)
-            }
-
-        }
-
         // lidando com o deslocamento
-        this.deslocamento = 5
-        this.getDeslocamento = () => this.deslocamento
-        this.setdeslocamento = (d) => {this.deslocamento = d}
+        var deslocamento = 5
+        this.getDeslocamento = () => deslocamento
+        this.setdeslocamento = (d) => {deslocamento = d}
 
         this.deslocar = function(deslocamento, direção='left'){
             
@@ -178,23 +277,29 @@
             // deslocamento para esquerda
             if(direção == 'left' || direção == ''){
 
+                // cada elemento é um par de canos(superior e inferior)
                 for(let elemento of this.canos){
 
+                    // posição de cada par de canos
                     let posAtual = elemento.getPosX()
-                    let largura = elemento.getLargura()
                     elemento.setPosX(posAtual - d)
 
                     // verificando se o elemento saiu da tela
                     if(posAtual < -elemento.getLargura()){ 
 
-                        let calculo = quantidade * (largura + distancia)
+                        const calculo = quantidade * (largura + distancia)
                         elemento.sortearAltura(altura, abertura)
                         elemento.setPosX(calculo)
                     }
 
                     // ajustando placar
-                    let meioCanos = elemento.getLargura() / 2
-                    let passouCano = (posAtual + largura )
+                    let largPosBird = bird.getLargura() + bird.getX()
+                    let largPosCano = posAtual + largura
+
+                    // verificando se o cano passou do pássaro
+                    const cond1 = largPosCano <= largPosBird 
+                    const cond2 = largPosCano > largPosBird - deslocamento
+                    if(cond1 && cond2){score.aumentarScore()}
                 }
 
             }
@@ -210,46 +315,46 @@
         }
 
         // relacionados com animação
-        this.timerID = null
-        this.animando = false
-        this.setAnimando = (estado) => {this.animando = estado}
+        var timerID = null // identificador da função setInterval
+        var animando = false
+        this.isAnimando = () => animando
 
-        // começar a animação
+        // começa a animação
         this.start = function(intervalo=0.02, deslocamento=3){
 
-            this.timerID = null
-            this.setAnimando(true)
-            let segundos = intervalo * 1000
-            this.timerID = setInterval(
-                ()=>{
-                    this.deslocar(deslocamento)
-                }, segundos
+            // verificando se já existe alguma animação rodando
+            if(animando) this.stop()
+
+            // transformando para segundos
+            const segundos = intervalo * 1000
+            animando = true
+            timerID = setInterval(
+                ()=>{this.deslocar(deslocamento)}, segundos
             )
         }
 
-        // parar a animação
+        // para a animação
         this.stop = () => {
-
-            clearInterval(this.timerID)
-            this.setAnimando(false)
-            this.timerID = null
+            clearInterval(timerID)
+            animando = false
         }
 
+        // reinicia para as posições iniciais dos canos
         this.resetarPos = function(){
             this.espaçarCanos(posLeft, distancia)  
         }
     }
 
-    let conjCanos = new organizarCanos(
-        tela.altura, 
-        100, 
-        tela.largura - 100, 
-        100, 
-        5
+    const conjCanos = new OrganizarCanos(
+        tela.altura, // altura
+        120, // largura
+        100, // abertura entre os canos
+        tela.largura - 100, // posLeft inicial
+        200, // distância entre os canos
+        5 // quantidade de canos
     )
 
-
-    conjCanos.inserirTodosNaTela(tela)
+    tela.inserirVários(conjCanos.elementos)
 
     
     
