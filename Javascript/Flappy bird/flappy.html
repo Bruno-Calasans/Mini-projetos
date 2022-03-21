@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy bird</title>
     <link rel="stylesheet" href="flappy.css">
-    <script src="flappy.js" defer></script>
+    <script src="Teste.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-
 
     <body>
 
@@ -16,8 +16,31 @@
 
         <div id="tela">
 
+            <!--modais-->
+            <div class="modal">Modal
+                <span class="material-icons modal-fechar">close</span>
+            </div>
+
+            <!--menus de controle-->
+            <div id="menu">
+                
+                <div id="play-pause">
+                    <i class="material-icons">play_arrow</i>
+                </div>
+
+                <div id="restart">
+                    <i class="material-icons">replay</i>
+                </div>
+
+                <div id="controles"> 
+                    <i class="material-icons">sports_esports</i>
+                    
+                </div>
+
+            </div>
+
             <!--o pássaro em si-->
-            <img id="bird" src="images/passaro.png" alt="bird"></img>
+            <img id="bird" src="/images/passaro.png" alt="bird"></img>
 
             <!--as barreairas/canos-->
             <div class="canos">
@@ -39,5 +62,22 @@
         </div>
         
     </body>
+
+    <script>
+
+        // adicionando eventos de clicks para todos os elementos da classe 'modal'
+        let fecharModalBtns = document.getElementsByClassName('modal-fechar')
+        let modais = document.getElementsByClassName('modal')
+
+        for(let i = 0; i < modais.length; i++){
+
+            fecharModalBtns[i].onclick = () => {
+                modais[i].style.display = 'none'
+
+            }
+        }
+
+        console.log(modais, fecharModalBtns);
+    </script>
 
 </html>
